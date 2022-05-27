@@ -23,7 +23,7 @@ class Umbral:
 
     def abrirArchivo(self):
         try:
-            self.matrizUmbral = np.loadtxt(self.rutaUmbral(),dtype="str", delimiter=",")
+            self.matrizUmbral = np.loadtxt(self.rutaUmbral(),dtype="float", delimiter=",")
         except FileNotFoundError as e:
             exit("Error archivo no encontrado ..no exite archivo del umbral")
 

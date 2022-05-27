@@ -29,7 +29,7 @@ def parteUno():
     """leer archivo de umbrales"""
     objUmbral = Umbral(objFtp.fullPath)
     objUmbral.abrirArchivo()
-    print(objUmbral.matrizUmbral[:,3])
+    #print(objUmbral.matrizUmbral[:,3])
 
 
 
@@ -37,6 +37,7 @@ def parteUno():
     """Realizar las operaciones con umbral y archivo obtenido de ftp"""
     objProcesamiento = Procesamiento(objEstacion.cabecera,objEstacion.datos,objUmbral.matrizUmbral)
     objProcesamiento.tamaArrays()
+    print(objProcesamiento.listaFinal)
 
 
     """LLamar script guardar"""

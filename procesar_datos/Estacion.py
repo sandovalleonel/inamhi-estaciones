@@ -12,7 +12,7 @@ class Estacion:
         if data.shape[0] < 2  or data.shape[1] < 5:
             exit("Erro archivo no valido -- Estaciones.py")
 
-        self.cabecera = data[0, :]
+        self.cabecera = data[0, 1:]
         datosTemp = data[1:, 1:]
 
         datosTemp = np.char.strip(datosTemp)

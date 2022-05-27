@@ -1,12 +1,6 @@
 import time
-
-from  obtener_datos.ConexionFtp import ConexionFtp
-from  paralelismo.ListarArchivos import ListaArchivo
-from procesar_datos.VerficarArchivo import Archivos
+from paralelismo.ListarArchivos import ListaArchivo
 from multiprocessing import Pool
-
-
-
 
 def main():
 
@@ -23,7 +17,7 @@ def main():
     listaArchivo = ListaArchivo()
 
     tiempoInicio = time.time()
-    with Pool(24) as p:
+    with Pool(2) as p:
         p.map(listaArchivo.imprimirArchivos, linkRutas)
     tiempoFin = time.time()
     print("-" * 15, "tiempo", (tiempoFin - tiempoInicio))
