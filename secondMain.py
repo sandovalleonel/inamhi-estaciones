@@ -31,7 +31,11 @@ def parteUno():
     objUmbral.abrirArchivo()
     #print(objUmbral.matrizUmbral[:,3])
 
-
+    """
+    cambio...si se sale del umbral...poner datos null
+    la salida final para guardar poner adicionalmente cuantos valores se usaron para sumaro promediar...buscar en la columna
+    8_544161m para ver si sirve o no la fila..para eliminar
+    """
 
 
     """Realizar las operaciones con umbral y archivo obtenido de ftp"""
