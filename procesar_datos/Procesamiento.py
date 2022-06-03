@@ -17,46 +17,57 @@ class Procesamiento:
         self.datos = datos
         self.umbral = umbral
 
+    def filaMantenimiento(self):
+
+        #buscar pos columna manteniemiento
+        posColumna = -1
+        i = 0
+
+        for val in self.cabecera:
+            if val.split("_")[1] == '544161m':
+                posColumna = i
+                break
+            i = i+1
+
+        if(posColumna != -1):
+            #ver que columnas se deben eliminar
+            auxColumnaMantenimiento = self.datos[:,posColumna]
+            lista = np.where(auxColumnaMantenimiento == 1 )
+
+            ###eliminar filas con banderas
+            if(len(lista[0]) > 0):
+                neww = np.delete(self.datos, lista[0], axis=0) ##eliminar datos no relevantes
+                self.datos = neww
+
+
     def tamaArrays(self):
+        self.filaMantenimiento()
         print("*"*40)
-        #print(self.cabecera.shape)
-        #print(self.datos.shape)
-        #print(self.umbral.shape)
-        #########
+        if self.datos.shape[1] != self.umbral.shape[1]:
+            exit("error el archivo umbral y matriz de datos no tiene mismo numero de columnas")
 
-        ###eliminar filas con banderas
-        neww = np.delete(self.datos, [1,2,3,4], axis=0) ##eliminar datos no relevantes
-        #print(neww.shape)
-        ###eliminar filas con banderas
+        for i in range(self.datos.shape[1]):
 
-        self.datos[:,0]=[8,8,8,8,8]
+            arr = self.datos[:,i]
+            umbralMaximo = self.umbral[1,i]
+            umbralMinimo = self.umbral[2,i]
 
-        print(self.datos[:,0])
-
-        for i in range(self.umbral.shape[1]):
-            indice = i * 2
-            arr = self.datos[:,indice]
-            umbralMaximo = self.umbral[2,i]
-            umbralMinimo = self.umbral[3,i]
-
-            print(i,umbralMaximo,umbralMinimo)
-            print(arr)
             lista_nueva = list(map(lambda x: x if (umbralMinimo <= x <= umbralMaximo) else None , arr))
-            print(lista_nueva)
             lista_nueva = list(filter(None, lista_nueva))
-            print(lista_nueva)
 
-
-            #print(lista_nueva)
 
             ##sumar o promediar
-            cabeceraNombre = self.cabecera[indice]#.split("_")[1]
-            if(self.umbral[1,i] == 1):
+            cabeceraNombre = self.cabecera[i]#.split("_")[1]
+
+            #suma
+            if(self.umbral[0,i] == 1):
                 res = (sum(lista_nueva))
-                self.listaFinal.append([cabeceraNombre,res])
+                self.listaFinal.append([cabeceraNombre,res,len(lista_nueva)])
+            #promedio
+            elif(self.umbral[0,i] == 0):
+                res = 0
+                if len(lista_nueva) != 0:
+                    res = (sum(lista_nueva)/len(lista_nueva))
+                self.listaFinal.append([cabeceraNombre, res,len(lista_nueva)])
 
-            elif(self.umbral[1,i] == 0):
-                res = (sum(lista_nueva)/len(lista_nueva))
-                self.listaFinal.append([cabeceraNombre, res])
 
-            break

@@ -12,12 +12,14 @@ def main():
     primera_con.connn()
     """
     linkRutas = ['/home/leonel/Documentos/tesis/testAuto/M0003/D1/2014/11/28',
+                 '/home/leonel/Documentos/tesis/testAuto/M0003/D1/2014/11/28',
+                 '/home/leonel/Documentos/tesis/testAuto/M0003/D1/2014/11/28',
                  '/home/leonel/Documentos/tesis/testAuto/M0003/D1/2014/11/28'
                  ]
     listaArchivo = ListaArchivo()
 
     tiempoInicio = time.time()
-    with Pool(2) as p:
+    with Pool(1) as p:
         p.map(listaArchivo.imprimirArchivos, linkRutas)
     tiempoFin = time.time()
     print("-" * 15, "tiempo", (tiempoFin - tiempoInicio))

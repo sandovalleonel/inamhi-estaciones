@@ -46,10 +46,15 @@ class ConexionFtp:
             os.makedirs(nombreCarpeta)
 
     def buscarArchivo(self,Url):
-        print("*"*30)
+
         self.ftp.cwd(Url)   #controlar que la carpeta exista
         files = self.ftp.nlst()
+
         filesFiltrados= self.listFiles(Url, files)
+
+        if len(filesFiltrados) == 0:
+            exit("carpeta sin archivos ")
+
         self.fullPath = filesFiltrados[len(filesFiltrados)-1] # verificar si es el ultimo archivo
         self.cargarArchivoEnMemoria(self.fullPath)
         self.descargarArchivo(self.fullPath)

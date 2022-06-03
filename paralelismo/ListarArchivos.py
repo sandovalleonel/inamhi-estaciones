@@ -4,7 +4,7 @@ import numpy as np
 class ListaArchivo:
 
    def imprimirArchivos(self, ruta):
-       #print(ruta)
+       print(ruta)
        with os.scandir(ruta) as ficheros:
            for fichero in ficheros:
 

@@ -23,8 +23,14 @@ class Umbral:
 
     def abrirArchivo(self):
         try:
-            self.matrizUmbral = np.loadtxt(self.rutaUmbral(),dtype="float", delimiter=",")
+            mat = np.loadtxt(self.rutaUmbral(),dtype="str", delimiter=",")
+
+            self.matrizUmbral = mat[3:,1:].astype(float)#ver los datos que son importantes
+            if self.matrizUmbral.shape[0] < 2 or self.matrizUmbral.shape[1] < 5:
+                exit("Error archivo no valido 'columnas minimas'-- Umbral.py")
+
         except FileNotFoundError as e:
-            exit("Error archivo no encontrado ..no exite archivo del umbral")
+            exit("Error archivo no encontrado ..no exite archivo del umbral, o no tiene formato correcto")
+
 
 

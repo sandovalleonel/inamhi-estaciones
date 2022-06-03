@@ -12,14 +12,18 @@ class Estacion:
         if data.shape[0] < 2  or data.shape[1] < 5:
             exit("Erro archivo no valido -- Estaciones.py")
 
-        self.cabecera = data[0, 1:]
-        datosTemp = data[1:, 1:]
+        self.cabecera = data[0, 1::2]
+
+        datosTemp = data[1:, 1::2]
 
         datosTemp = np.char.strip(datosTemp)
         datosTemp[datosTemp == "//////"] = np.nan
         datosTemp[datosTemp == "/////"] = np.nan
+        #datosTemp[datosTemp == "0_OTPV2"] = np.nan
+
         self.datos = datosTemp.astype(float)
-        print(self.datos.shape)
+        #print(self.cabecera[::2])
+        #print(self.datos[:,::2])
 
 
 """
