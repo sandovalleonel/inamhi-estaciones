@@ -26,7 +26,7 @@ def cagarProcesos(Url):
     print("*"*40)
 
     """obtener datos del servidor..."""
-    objFtp = ConexionFtp("192.168.1.3", "leonel", "23456789")
+    objFtp = ConexionFtp("192.168.1.9", "leonel", "23456789")
     objFtp.conIniciar()
 
     objFtp.buscarArchivo(Url)#recibe un string
