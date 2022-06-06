@@ -28,5 +28,18 @@ class Rutas:
         lista.append('/home/leonel/regiones/Sierra/M1107/')
         lista.append('/home/leonel/regiones/Sierra/M0024/')
         lista.append('/home/leonel/regiones/Sierra/M5090/')
+
+        lista2 = []
+        lista2.extend(lista)
+        lista2.extend(lista)
+        lista2.extend(lista)
+        lista2.extend(lista)
+        lista2.extend(lista)
+        lista2.extend(lista)
+        lista2.extend(lista)
+        lista2.extend(lista)
+        lista2.extend(lista)
+        lista2.extend(lista)
+        print(str(len(lista2))+"----------------total ficheros")
         return lista
 

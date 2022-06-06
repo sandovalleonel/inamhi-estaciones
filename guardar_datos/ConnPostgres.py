@@ -6,13 +6,14 @@ def ingresarPostgresMuchos(listaSQL):
     try:
         with conexion.cursor() as cursor:
             for sql in listaSQL:
+                print(sql)
                 cursor.execute(sql)
         conexion.commit()
 
     except psycopg2.Error as e:
         print("Ocurrió un error al insertar: ", e)
-    finally:
-        conexion.close()
+    #finally:
+    #    conexion.close()
 
 
 def ingresarPostgresUno(SQL):

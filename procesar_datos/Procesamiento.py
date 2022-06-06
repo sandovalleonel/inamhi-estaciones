@@ -8,6 +8,7 @@ Etradas
     numpy array umbral
 """
 import numpy as np
+from numpy.core._multiarray_umath import error
 
 
 class Procesamiento:
@@ -18,6 +19,7 @@ class Procesamiento:
         self.umbral = umbral
 
     def filaMantenimiento(self):
+
 
         #buscar pos columna manteniemiento
         posColumna = -1
@@ -41,33 +43,41 @@ class Procesamiento:
 
 
     def tamaArrays(self):
-        self.filaMantenimiento()
-        print("*"*40)
-        if self.datos.shape[1] != self.umbral.shape[1]:
-            exit("error el archivo umbral y matriz de datos no tiene mismo numero de columnas")
+        self.listaFinal = []
 
-        for i in range(self.datos.shape[1]):
+        try:
 
-            arr = self.datos[:,i]
-            umbralMaximo = self.umbral[1,i]
-            umbralMinimo = self.umbral[2,i]
+            self.filaMantenimiento()
+            #print("*"*40)
+            if self.datos.shape[1] != self.umbral.shape[1]:
+                exit("error el archivo umbral y matriz de datos no tiene mismo numero de columnas")
 
-            lista_nueva = list(map(lambda x: x if (umbralMinimo <= x <= umbralMaximo) else None , arr))
-            lista_nueva = list(filter(None, lista_nueva))
+            for i in range(self.datos.shape[1]):
 
+                arr = self.datos[:,i]
+                umbralMaximo = self.umbral[1,i]
+                umbralMinimo = self.umbral[2,i]
 
-            ##sumar o promediar
-            cabeceraNombre = self.cabecera[i]#.split("_")[1]
-
-            #suma
-            if(self.umbral[0,i] == 1):
-                res = (sum(lista_nueva))
-                self.listaFinal.append([cabeceraNombre,res,len(lista_nueva)])
-            #promedio
-            elif(self.umbral[0,i] == 0):
-                res = 0
-                if len(lista_nueva) != 0:
-                    res = (sum(lista_nueva)/len(lista_nueva))
-                self.listaFinal.append([cabeceraNombre, res,len(lista_nueva)])
+                lista_nueva = list(map(lambda x: x if (umbralMinimo <= x <= umbralMaximo) else None , arr))
+                lista_nueva = list(filter(None, lista_nueva))
 
 
+                ##sumar o promediar
+                cabeceraNombre = self.cabecera[i]#.split("_")[1]
+
+                #suma
+                if(self.umbral[0,i] == 1):
+                    res = (sum(lista_nueva))
+                    self.listaFinal.append([cabeceraNombre,res,len(lista_nueva)])
+                #promedio
+                elif(self.umbral[0,i] == 0):
+                    res = 0
+                    if len(lista_nueva) != 0:
+                        res = (sum(lista_nueva)/len(lista_nueva))
+                    self.listaFinal.append([cabeceraNombre, res,len(lista_nueva)])
+
+
+        except error:
+            CRED = '\033[91m'
+            CEND = '\033[0m'
+            print(CRED + "Error procesar archivo procesamiento.py seccion preprocesamiento ..............ya no procesados, salto alsiguiente archivo "+CEND)
