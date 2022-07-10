@@ -29,11 +29,34 @@ for Tabla in caberceraTotal:
         CREATE TABLE IF NOT EXISTS {Tabla}(
                id SERIAL PRIMARY KEY,
                fecha_creacion date,
+               fecha_archivo VARCHAR NOT NULL, 
+               nom VARCHAR,
+               resultado_00 VARCHAR ,
+               tot_proce_00 VARCHAR,
+               resultado_05 VARCHAR ,
+               tot_proce_05 VARCHAR,
+               resultado_10 VARCHAR ,
+               tot_proce_10 VARCHAR,
+               resultado_15 VARCHAR ,
+               tot_proce_15 VARCHAR,
+               resultado_20 VARCHAR ,
+               tot_proce_20 VARCHAR,
+               resultado_25 VARCHAR ,
+               tot_proce_25 VARCHAR,
+               resultado_30 VARCHAR ,
+               tot_proce_30 VARCHAR,
+               resultado_35 VARCHAR ,
+               tot_proce_35 VARCHAR,
+               resultado_40 VARCHAR ,
+               tot_proce_40 VARCHAR,
+               resultado_45 VARCHAR ,
+               tot_proce_45 VARCHAR,
+               resultado_50 VARCHAR ,
+               tot_proce_50 VARCHAR,
+               resultado_55 VARCHAR ,
+               tot_proce_55 VARCHAR
                
-               
-               nom VARCHAR NOT NULL,
-               res VARCHAR NOT NULL,
-               tot VARCHAR NOT NULL
+
             );
     """)
     listaEscribir.append(nombreTabla)

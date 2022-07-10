@@ -11,8 +11,9 @@ def Paraleliszar():
     tIn = time.time()
     # Urls = Rutas().obtenerUrls()# "/home/leonel/testAuto/M0003/D1/2020/10/15/"
     Urls = Rutas().rutasQuemada()
+    #print(Urls)
 
-    with Pool(3) as p:
+    with Pool(5) as p:
         p.map(cagarProcesos,Urls)
     tFi = time.time()
     tTott = tFi - tIn
@@ -22,16 +23,17 @@ def Paraleliszar():
 
 
 def cagarProcesos(Url):
-    tInicio = time.time()
-    print("*"*40)
+
+    #print("*"*40)
+    
 
     """obtener datos del servidor..."""
-    objFtp = ConexionFtp("192.168.1.9", "leonel", "23456789")
+    objFtp = ConexionFtp("localhost", "leonel", "23456789")
     objFtp.conIniciar()
 
     objFtp.buscarArchivo(Url)#recibe un string
     print(objFtp.fullPath)
-    #objFtp.conFinalizar()-------------------<>>>>>>>>>>
+
 
     """limpiar la matriz obtenida del objeto ftp"""
     objEstacion = Estacion()
@@ -45,10 +47,23 @@ def cagarProcesos(Url):
     objProcesamiento = Procesamiento(objEstacion.cabecera,objEstacion.datos,objUmbral.matrizUmbral)
     objProcesamiento.tamaArrays()
     #print(objProcesamiento.listaFinal)
+    #funcionTemporal(objProcesamiento.listaFinal)
     """LLamar script guardar"""
+    tIn = time.time()
     guardar(objProcesamiento.listaFinal, objUmbral.nombreArchivoUmbral,objFtp.fullPath)
-    tFin = time.time()
-    tTotal = tFin-tInicio
+    tFi = time.time()
+    tTott = tFi - tIn
+    print("Tiempo save Completo  "+str((tTott  )))
 
-    print("Tiempo total " + str(tTotal))
 
+
+
+def funcionTemporal(array):
+    cont=1
+    for fila in array:
+        print(fila)
+        if fila[2] != 0:
+            #print(fila[1])
+            cont=cont+1
+    
+   

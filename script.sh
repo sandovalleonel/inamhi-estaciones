@@ -1,2 +1,2 @@
 echo  "Ejecutando script main"
-python3 secondMain.py
+python3 main.py

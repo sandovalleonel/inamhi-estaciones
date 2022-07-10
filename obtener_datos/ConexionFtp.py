@@ -27,7 +27,7 @@ class ConexionFtp:
         self.host = host
         self.usuario = usuario
         self.contrasenia = contrasenia
-        print("inicalizacion ftp")
+        #print("inicalizacion ftp")
 
 
     def conIniciar(self):
@@ -58,7 +58,7 @@ class ConexionFtp:
 
         self.fullPath = filesFiltrados[len(filesFiltrados)-1] # verificar si es el ultimo archivo
         self.cargarArchivoEnMemoria(self.fullPath)
-        self.descargarArchivo(self.fullPath)
+        #self.descargarArchivo(self.fullPath)
         self.conFinalizar()
 
     def descargarArchivo(self,RutaCompleta):

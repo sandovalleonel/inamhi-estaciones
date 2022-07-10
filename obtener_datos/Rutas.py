@@ -24,22 +24,14 @@ class Rutas:
         file.close()
         return (listaRutas)
     def rutasQuemada(self):
-        lista = []
-        lista.append('/home/leonel/regiones/Sierra/M1107/')
-        lista.append('/home/leonel/regiones/Sierra/M0024/')
-        lista.append('/home/leonel/regiones/Sierra/M5090/')
-
+        lista = ['/home/leonel/regiones/Sierra/M1107/', '/home/leonel/regiones/Sierra/M0024/','/home/leonel/regiones/Sierra/M5090/' ]
+        #lista = ['/home/leonel/regiones/Sierra/M1107/' ]
         lista2 = []
-        lista2.extend(lista)
-        lista2.extend(lista)
-        lista2.extend(lista)
-        lista2.extend(lista)
-        lista2.extend(lista)
-        lista2.extend(lista)
-        lista2.extend(lista)
-        lista2.extend(lista)
-        lista2.extend(lista)
-        lista2.extend(lista)
+        tot = 10 #total arcivos tot*3
+        for cont in range(tot):
+            for x in lista:
+                lista2.append(x)
+        
         print(str(len(lista2))+"----------------total ficheros")
-        return lista
+        return lista2
 
