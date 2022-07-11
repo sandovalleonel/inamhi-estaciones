@@ -8,41 +8,36 @@ database="inamhi"
 
 
 def guardar(lista,nombreEstacion,nombreFichero):
-
     codigoFecha = obtenerInformacionFecha(nombreFichero)
-
     nombreEstacion = nombreEstacion.split(".")[0]
-    lista_Guardar = []
-    sqlTabla = ""
-    opc=[[0]]
-    for val in lista:
-        nombreTabla = nombreEstacion+"_"+val[0].split('_')[1]
-        print(nombreTabla)
-        #opc = InsertOrUpdate(nombreTabla,codigoFecha[0])
-   
-
-        if(opc[0][0] == 0):
-            sqlTabla = (f"insert into test.{nombreTabla} ( fecha_creacion, fecha_archivo, nom, resultado_{codigoFecha[1]},tot_proce_{codigoFecha[1]})values('1996-12-02','{codigoFecha[0]}','none','{val[1]}','{val[2]}');")
-        if(opc[0][0] != 0):
-            sqlTabla = (f"update  test.{nombreTabla} set resultado_{codigoFecha[1]}='{val[1]}',tot_proce_{codigoFecha[1]}='{val[2]}';")
-        lista_Guardar.append(sqlTabla)
-    crearConexionYGuardar(lista_Guardar)
-    ###########guardar
+    crearConexionYGuardar(lista,nombreEstacion,codigoFecha)
 
 
 
 
-def crearConexionYGuardar(listaSql):
-   
+def crearConexionYGuardar(ArrayDatos,estacionNombre,codigoFecha):
+    sql_insert = ""
+    sql_select = ""
     try:
         connection = psycopg2.connect(user=user,password=password, host=host,port=port,database=database)
         cursor = connection.cursor()
-        for sql in listaSql:
-            #print(sql)
-            cursor.execute(sql)
+        for val in ArrayDatos:
+            nombreTabla = estacionNombre+"_"+val[0].split('_')[1]
+            cursor.execute(f"SELECT count(*) FROM test.{nombreTabla}  where fecha_archivo='{codigoFecha[0]}';")
+            sql_select=(f"SELECT count(*) FROM test.{nombreTabla}  where fecha_archivo='{codigoFecha[0]}';")
+            existenRegistros = cursor.fetchall()
+            if(existenRegistros[0][0] == 0):
+                cursor.execute (f"insert into test.{nombreTabla} ( fecha_creacion, fecha_archivo, nom, resultado_{codigoFecha[1]},tot_proce_{codigoFecha[1]})values('1996-12-02','{codigoFecha[0]}','none','{val[1]}','{val[2]}');")
+                sql_insert=(f"insert into test.{nombreTabla} ( fecha_creacion, fecha_archivo, nom, resultado_{codigoFecha[1]},tot_proce_{codigoFecha[1]})values('1996-12-02','{codigoFecha[0]}','none','{val[1]}','{val[2]}');")
+            if(existenRegistros[0][0] != 0):
+                cursor.execute (f"update  test.{nombreTabla} set resultado_{codigoFecha[1]}='{val[1]}',tot_proce_{codigoFecha[1]}='{val[2]}';")
+                sql_insert = (f"update  test.{nombreTabla} set resultado_{codigoFecha[1]}='{val[1]}',tot_proce_{codigoFecha[1]}='{val[2]}';")
+
         connection.commit()
     except:
         print("Error guardar sql")
+        print(sql_select)
+        print(sql_insert)
     finally:
         if connection:
             cursor.close()
@@ -59,22 +54,5 @@ def obtenerInformacionFecha(cadena):
     #print(f" año {anio} , mes {mes}, día {dia}, Hora {hora}:{minuto}:{segundo}")
     return [anio+mes+dia+hora,minuto]
 
-
-def InsertOrUpdate(nombreTabla,codigoFecha):
-    registro = 0
-    try:
-        connection = psycopg2.connect(user=user,password=password, host=host,port=port,database=database)
-        cursor = connection.cursor()
-        cursor.execute(f"SELECT count(*) FROM test.{nombreTabla}  where fecha_archivo='{codigoFecha}';")
-        registro = cursor.fetchall()
-        connection.commit()
-    except:
-        print("Error consultar sql")
-    finally:
-        if connection:
-            cursor.close()
-            connection.close()
-    
-    return registro
 
 

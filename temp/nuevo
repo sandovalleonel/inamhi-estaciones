@@ -1,0 +1,14 @@
+%Cpu(s): 4,1 us, 5,5 sy, 0,0 ni,90,4 id, 0,0 wa, 0,0 hi, 0,0 si, 0,0 st
+MiB Mem :  7822,9 total,  2514,6 free,  2564,5 used,  2743,7 buff/cache
+MiB Swap:   977,0 total,   838,6 free,   138,4 used.  4177,6 avail Mem 
+%Cpu(s): 7,0 us, 2,5 sy, 0,0 ni,87,2 id, 3,3 wa, 0,0 hi, 0,0 si, 0,0 st
+%Cpu(s):15,8 us, 6,9 sy, 0,0 ni,76,8 id, 0,5 wa, 0,0 hi, 0,0 si, 0,0 st
+%Cpu(s): 9,6 us, 2,8 sy, 0,0 ni,87,4 id, 0,0 wa, 0,0 hi, 0,3 si, 0,0 st
+MiB Mem :  7822,9 total,  2469,3 free,  2563,1 used,  2790,4 buff/cache
+MiB Swap:   977,0 total,   838,6 free,   138,4 used.  4132,3 avail Mem 
+%Cpu(s):27,9 us, 8,2 sy, 0,0 ni,63,8 id, 0,0 wa, 0,0 hi, 0,0 si, 0,0 st
+%Cpu(s):14,2 us, 5,0 sy, 0,0 ni,80,5 id, 0,0 wa, 0,0 hi, 0,2 si, 0,0 st
+%Cpu(s): 5,5 us, 1,8 sy, 0,0 ni,91,2 id, 1,5 wa, 0,0 hi, 0,0 si, 0,0 st
+MiB Mem :  7822,9 total,  2474,9 free,  2565,8 used,  2782,2 buff/cache
+MiB Swap:   977,0 total,   838,6 free,   138,4 used.  4138,0 avail Mem 
+%Cpu(s): 6,9 us, 5,4 sy, 0,0 
