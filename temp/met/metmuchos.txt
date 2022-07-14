@@ -1,0 +1,15 @@
+#3000 archivo al mismo tiempo
+#tiempo total
+Tiempo final Completo  94.50794005393982
+
+#tiempo milisegundos
+tiempos maximo cada modulo  [638.16642761  14.60576057 521.89493179]
+media de cada modulo  [270.07504869   1.74900381 194.09995365]
+Cpu max 68.9
+Cpu promedio 63.081720430107524
+Ram max 1330.4
+Ram proemdio 1274.628125
+Ram tot 7822.9
+
+
+

@@ -1,0 +1,10 @@
+Tiempo final Completo  295.8008642196655
+
+#tiempos milisegundos
+tiempos maximo cada modulo  [100.35872459   2.35080719 457.75556564]
+media de cada modulo  [38.9925588   0.86234522 58.70012005]
+Cpu max 27.6
+Cpu promedio 15.525081433224752
+Ram max 1072.4
+Ram proemdio 1051.3805825242719
+Ram tot 7822.9

@@ -22,8 +22,6 @@ def Paraleliszar():
     Urls = Rutas().rutasQuemada()
 
     with Pool(15) as p:
-    #for x in Urls:
-        #cagarProcesos(x)
         metricasTiempo = ( p.map(cagarProcesos,Urls))
     tFi = time.time()
     tTott = tFi - tIn
@@ -53,48 +51,34 @@ def cagarProcesos(Url):
     tInmod2 = time.time()
     objEstacion = Estacion()
     objEstacion.Limpiar(objFtp.data)
-
+    
     """leer archivo de umbrales"""
     objUmbral = Umbral(objFtp.fullPath)
     objUmbral.abrirArchivo()
+    
+    """Realizar las operaciones con umbral y archivo obtenido de ftp"""
+    objProcesamiento = Procesamiento(objEstacion.cabecera,objEstacion.datos,objUmbral.matrizUmbral)
+    objProcesamiento.tamaArrays()
     tFimod2 = time.time()
     tTottmod2 = tFimod2 - tInmod2
     
 
 
-    """Realizar las operaciones con umbral y archivo obtenido de ftp"""
+    """LLamar script guardar"""
     tInmod3 = time.time()
-    objProcesamiento = Procesamiento(objEstacion.cabecera,objEstacion.datos,objUmbral.matrizUmbral)
-    objProcesamiento.tamaArrays()
+    guardar(objProcesamiento.listaFinal, objUmbral.nombreArchivoUmbral,objFtp.fullPath)
     tFimod3 = time.time()
     tTottmod3 = tFimod3 - tInmod3
     
-
-
-    """LLamar script guardar"""
-    tInmod4 = time.time()
-    guardar(objProcesamiento.listaFinal, objUmbral.nombreArchivoUmbral,objFtp.fullPath)
-    tFimod4 = time.time()
-    tTottmod4 = tFimod4 - tInmod4
-    
-    #print("Tiempo save Completo  "+str((tTott  )))
-    """
-    diccionario = dict();
-    diccionario['mod1']=tTottmod1
-    diccionario['mod2']=tTottmod2
-    diccionario['mod3']=tTottmod3
-    diccionario['mod4']=tTottmod4
-    """
-    
-    return [tTottmod1,tTottmod2,tTottmod3,tTottmod4]
+    return [tTottmod1,tTottmod2,tTottmod3]
 
 
 def escribirFichero(matriz):
-    file = open("temp/filename.txt", "w")
+    file = open("temp/tiempo.txt", "w")
     aux=0
     for linea in matriz:
         aux+=sum(linea)
-        fila =str(linea[0])+","+str(linea[1])+","+str(linea[2])+","+str(linea[3])+"\n"
+        fila =str(linea[0])+","+str(linea[1])+","+str(linea[2])+"\n"
         
         file.write(fila)
     file.close()

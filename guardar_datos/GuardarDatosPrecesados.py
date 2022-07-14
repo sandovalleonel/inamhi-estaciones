@@ -16,28 +16,25 @@ def guardar(lista,nombreEstacion,nombreFichero):
 
 
 def crearConexionYGuardar(ArrayDatos,estacionNombre,codigoFecha):
-    sql_insert = ""
-    sql_select = ""
+     
     try:
         connection = psycopg2.connect(user=user,password=password, host=host,port=port,database=database)
         cursor = connection.cursor()
+        existenRegistros= [[0]]
         for val in ArrayDatos:
             nombreTabla = estacionNombre+"_"+val[0].split('_')[1]
-            cursor.execute(f"SELECT count(*) FROM test.{nombreTabla}  where fecha_archivo='{codigoFecha[0]}';")
-            sql_select=(f"SELECT count(*) FROM test.{nombreTabla}  where fecha_archivo='{codigoFecha[0]}';")
-            existenRegistros = cursor.fetchall()
+            #cursor.execute(f"SELECT count(*) FROM test.{nombreTabla}  where fecha_archivo='{codigoFecha[0]}';")
+            #existenRegistros = cursor.fetchall()
             if(existenRegistros[0][0] == 0):
                 cursor.execute (f"insert into test.{nombreTabla} ( fecha_creacion, fecha_archivo, nom, resultado_{codigoFecha[1]},tot_proce_{codigoFecha[1]})values('1996-12-02','{codigoFecha[0]}','none','{val[1]}','{val[2]}');")
-                sql_insert=(f"insert into test.{nombreTabla} ( fecha_creacion, fecha_archivo, nom, resultado_{codigoFecha[1]},tot_proce_{codigoFecha[1]})values('1996-12-02','{codigoFecha[0]}','none','{val[1]}','{val[2]}');")
+                #sql_insert=(f"insert into test.{nombreTabla} ( fecha_creacion, fecha_archivo, nom, resultado_{codigoFecha[1]},tot_proce_{codigoFecha[1]})values('1996-12-02','{codigoFecha[0]}','none','{val[1]}','{val[2]}');")
             if(existenRegistros[0][0] != 0):
                 cursor.execute (f"update  test.{nombreTabla} set resultado_{codigoFecha[1]}='{val[1]}',tot_proce_{codigoFecha[1]}='{val[2]}';")
-                sql_insert = (f"update  test.{nombreTabla} set resultado_{codigoFecha[1]}='{val[1]}',tot_proce_{codigoFecha[1]}='{val[2]}';")
+                #sql_insert = (f"update  test.{nombreTabla} set resultado_{codigoFecha[1]}='{val[1]}',tot_proce_{codigoFecha[1]}='{val[2]}';")
 
         connection.commit()
     except:
         print("Error guardar sql")
-        print(sql_select)
-        print(sql_insert)
     finally:
         if connection:
             cursor.close()

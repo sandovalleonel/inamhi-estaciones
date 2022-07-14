@@ -27,7 +27,7 @@ class Rutas:
         lista = ['/home/leonel/regiones/Sierra/M1107/', '/home/leonel/regiones/Sierra/M0024/','/home/leonel/regiones/Sierra/M5090/' ]
         #lista = ['/home/leonel/regiones/Sierra/M1107/' ]
         lista2 = []
-        tot = 10 #total arcivos tot*3
+        tot = 1000 #total arcivos tot*3
         for cont in range(tot):
             for x in lista:
                 lista2.append(x)
